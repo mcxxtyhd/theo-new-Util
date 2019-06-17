@@ -27,7 +27,7 @@ def cleaningBR_Diagnosis():
     while result_num>0:
         start_time1 = timeit.default_timer()
 
-        all_results = conntheo.theo.session.query(formativetableprimarykey_fourthtry).order_by(formativetableprimarykey_fourthtry.Medical_record_no).slice(numFirst, numSecond).all()
+        all_results = conntheo.theo.session.query(formativetableprimarykey_fourthtry).slice(numFirst, numSecond).all()
 
         end_time1 = timeit.default_timer()
         elapsed1 = end_time1 - start_time1
@@ -44,18 +44,21 @@ def cleaningBR_Diagnosis():
 
         for single_result in all_results:
             # pass
-            print(str(redis.getValue(int(single_result.Medical_record_no))))
-            # single_result.Lis_visit_id=pyEOR(71593504,int(single_result.Medical_record_no))
+            # print(str(redis.getValue(int(single_result.Medical_record_no))))
+
+            result=pyEOR(71593504,int(single_result.Medical_record_no))
+            # print(result)
+            single_result.Medical_record_no=result
 
             # 一定要flush()，否则会有语句丢失
-            # conntheo.theo.session.flush()
+            conntheo.theo.session.flush()
 
 
         end_time = timeit.default_timer()
         elapsed=end_time-start_time
         print('正在处理 {0}到{1}行的数据...'.format(str(numFirst-conntheo.perNum), str(numSecond-conntheo.perNum))+',花费了 %0.2fs...'%elapsed)
 
-    # 最后关闭
+    # # 最后关闭
     conntheo.theo.session.commit()
     conntheo.theo.session.close()
 

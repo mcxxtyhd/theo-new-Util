@@ -16,10 +16,10 @@ class agent:
         self.server_password = server_password
 
         # 这是sqlserver的连接方式
-        # engine = create_engine('mssql+pymssql://'+str(self.server_user)+':'+str(self.server_password)+'@'+str(self.server_address)+':'+str(self.server_port)+'/'+str(self.server_database)+'?charset=utf8')
+        engine = create_engine('mssql+pymssql://'+str(self.server_user)+':'+str(self.server_password)+'@'+str(self.server_address)+':'+str(self.server_port)+'/'+str(self.server_database)+'?charset=utf8')
 
         # 这是mysql的连接方式
-        engine = create_engine('mysql+pymysql://'+str(self.server_user)+':'+str(self.server_password)+'@'+str(self.server_address)+':'+str(self.server_port)+'/'+str(self.server_database)+'?charset=utf8', max_overflow=5)
+        # engine = create_engine('mysql+pymysql://'+str(self.server_user)+':'+str(self.server_password)+'@'+str(self.server_address)+':'+str(self.server_port)+'/'+str(self.server_database)+'?charset=utf8', max_overflow=5)
 
         # 创建DBSession类型:
         DBSession = sessionmaker(bind=engine)

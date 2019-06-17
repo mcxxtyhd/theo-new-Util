@@ -190,16 +190,6 @@ class BR_Scheme(Base):
 
     BR_EncounterNewID = Column(INT())
 
-# 生命体征
-class formativetableprimarykey_fourthtry(Base):
-    # 表的名字:
-    __tablename__ = 'formativetableprimarykey_fourthtry'
-
-    formativeID= Column(INT(), primary_key=True)
-    # 表的结构:
-    Medical_record_no = Column(INT())
-
-    Lis_visit_id = Column(INT())
 
 
 
